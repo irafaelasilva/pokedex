@@ -6,39 +6,39 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
 export default class PokemonList extends Component {
     state= {
-        pokemon: null,
-        offset: null,
+        pokemon: [],
+        count:0,
         limit: 30
     };
 
     componentDidMount() {
-        const { pokemon, offset, limit } = this.state;
         axios
-            .get(`https://pokeapi.co/api/v2/pokemon`)          
+            .get(`https://pokeapi.co/api/v2/pokemon?offset=${this.state.count}&limit=${this.state.limit}`)          
             .then(res => this.setState({ pokemon: res.data['results']}));
     }
 
     loadFunc = () => {
-        const { pokemon, offset, limit } = this.state;
-        this.setState({ offset: this.state.offset + limit });
         axios
-            .get(`https://pokeapi.co/api/v2/pokemon/`)          
-            .then(res => this.setState({ pokemon: this.state.pokemon.concat(res.data)}));
+            .get(`https://pokeapi.co/api/v2/pokemon?offset=${this.state.count}&limit=${this.state.limit}`)          
+            .then(res => this.setState({ pokemon: [...this.state.pokemon, ...res.data['results']],
+            count: this.state.count + this.state.limit
+            })
+        );
 
-    }
+    };
 
     render() {
         return (
             <React.Fragment>
             <InfiniteScroll
-                dataLength={this.state.pokemon}
+                dataLength={this.state.pokemon.length}
                 next={this.loadFunc}
                 hasMore={true}
                 loader={<h4>Loading...</h4>}
             >
             {this.state.pokemon ? (<div className="row">
                     {this.state.pokemon.map(pokemon => (
-                        <PokemonCard key={pokemon.name} name={pokemon.name} url={pokemon.url} />))}
+                        <PokemonCard key={pokemon.id} name={pokemon.name} url={pokemon.url} />))}
                     </div>) : (<h1>Loading Pokemons</h1>)}
             </InfiniteScroll>
             </React.Fragment>
