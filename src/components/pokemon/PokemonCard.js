@@ -8,7 +8,7 @@ export default class PokemonCard extends Component {
     };
 
     render() {
-    const { name, url } = this.props;
+    const { name } = this.props;
 
         return (
             <div className="col-md-3 col-sm-6 mb-5">
