@@ -1,8 +1,6 @@
 ### Pokédex
 
-List of pokemons on the basis of React
-
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+List of pokemons on the basis of React.
 
 ## Available Scripts
 
