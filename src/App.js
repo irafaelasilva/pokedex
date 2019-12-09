@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { HashRouter as Router, Route, Swith } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
@@ -15,9 +15,10 @@ class App extends Component {
         <div className="App">
           <NavBar />
           <div className="container">
-            <Swith>
+            <Switch>
               <Route exact path="/" component={Dashboard} />
-            </Swith>
+              <Route exact path="/pokemon/:pokemonIndex" component={Pokemon} />
+            </Switch>
           </div>
         </div>
       </Router>
