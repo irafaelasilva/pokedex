@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PokemonCard from "./PokemonCard";
+import { URLs } from "../../constants/URLs";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -14,7 +15,11 @@ export default class PokemonList extends Component {
     // this.loadFunc()
     axios
       .get(
-        `https://pokeapi.co/api/v2/pokemon?offset=${this.state.count}&limit=${this.state.limit}`
+        URLs.pokeAPI +
+          "offset=" +
+          `${this.state.count}` +
+          "&limit=" +
+          `${this.state.limit}`
       )
       .then(res =>
         this.setState({
@@ -27,7 +32,11 @@ export default class PokemonList extends Component {
   loadFunc = () => {
     axios
       .get(
-        `https://pokeapi.co/api/v2/pokemon?offset=${this.state.count}&limit=${this.state.limit}`
+        URLs.pokeAPI +
+          "offset=" +
+          `${this.state.count}` +
+          "&limit=" +
+          `${this.state.limit}`
       )
       .then(res =>
         this.setState({
