@@ -1,8 +1,8 @@
-### Pokédex
+## Pokédex :space_invader:
 
 List of pokemons on the basis of React.
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
  
