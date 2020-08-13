@@ -10,7 +10,7 @@
     "react-infinite-scroll-component": "^5.0.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
-    "serialize-javascript": "^2.1.2",
+    "serialize-javascript": "^3.1.0",
     "styled-components": "^4.4.1"
   },
   "scripts": {
