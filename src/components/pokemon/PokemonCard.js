@@ -32,7 +32,7 @@ export default class PokemonCard extends Component {
   state = {
     name: "",
     imageUrl: "",
-    pokemonIndex: ""
+    pokemonIndex: "",
   };
 
   componentDidMount() {
@@ -43,7 +43,7 @@ export default class PokemonCard extends Component {
     this.setState({
       name,
       imageUrl,
-      pokemonIndex
+      pokemonIndex,
     });
   }
 
@@ -53,7 +53,7 @@ export default class PokemonCard extends Component {
         <StyledLink to={`pokemon/${this.state.pokemonIndex}`}>
           <Card className="card">
             <h5 div className="card-header">
-              {this.state.pokemonIndex}{" "}
+              {""}
             </h5>
             <Sprite
               className="card-img-top rounded mx-auto mt-2"
@@ -65,7 +65,7 @@ export default class PokemonCard extends Component {
                   .toLowerCase()
                   .split(" ")
                   .map(
-                    letter =>
+                    (letter) =>
                       letter.charAt(0).toUpperCase() + letter.substring(1)
                   )
                   .join(" ")}

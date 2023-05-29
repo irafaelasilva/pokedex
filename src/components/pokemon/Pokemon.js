@@ -20,7 +20,7 @@ const TYPE_COLORS = {
   psychic: "ED4882",
   rock: "B9A156",
   steel: "B5B5C3",
-  water: "3295F6"
+  water: "3295F6",
 };
 
 export default class Pokemon extends Component {
@@ -38,7 +38,7 @@ export default class Pokemon extends Component {
       defense: "",
       speed: "",
       specialAttack: "",
-      specialDefense: ""
+      specialDefense: "",
     },
     height: "",
     weight: "",
@@ -49,7 +49,7 @@ export default class Pokemon extends Component {
     genderRatioFemale: "",
     evs: "",
     hatchSteps: "",
-    themeColor: "#EF5350"
+    themeColor: "#EF5350",
   };
 
   async componentDidMount() {
@@ -66,7 +66,7 @@ export default class Pokemon extends Component {
 
     let { hp, attack, defense, speed, specialAttack, specialDefense } = "";
 
-    pokemonRes.data.stats.map(stat => {
+    pokemonRes.data.stats.map((stat) => {
       switch (stat.stat.name) {
         case "hp":
           hp = stat["base_stat"];
@@ -98,41 +98,43 @@ export default class Pokemon extends Component {
     const weight =
       Math.round((pokemonRes.data.weight * 0.220462 + 0.00001) * 100) / 100;
 
-    const types = pokemonRes.data.types.map(type => type.type.name);
+    const types = pokemonRes.data.types.map((type) => type.type.name);
 
     const themeColor = `${TYPE_COLORS[types[types.length - 1]]}`;
 
     const abilities = pokemonRes.data.abilities
-      .map(ability => {
+      .map((ability) => {
         return ability.ability.name
           .toLowerCase()
           .split("-")
-          .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+          .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
           .join(" ");
       })
       .join(", ");
 
     const evs = pokemonRes.data.stats
-      .filter(stat => {
+      .filter((stat) => {
         if (stat.effort > 0) {
           return true;
         }
         return false;
       })
-      .map(stat => {
+      .map((stat) => {
         return `${stat.effort} ${stat.stat.name
           .toLowerCase()
           .split("-")
-          .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+          .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
           .join(" ")}`;
       })
       .join(", ");
 
-    await Axios.get(pokemonSpeciesUrl).then(res => {
+    await Axios.get(pokemonSpeciesUrl).then((res) => {
       let description = "";
-      res.data.flavor_text_entries.some(flavor => {
+      // eslint-disable-next-line array-callback-return
+      res.data.flavor_text_entries.some((flavor) => {
         if (flavor.language.name === "en") {
           description = flavor.flavor_text;
+          // eslint-disable-next-line array-callback-return
           return;
         }
       });
@@ -143,11 +145,11 @@ export default class Pokemon extends Component {
       const catchRate = Math.round((100 / 255) * res.data["capture_rate"]);
 
       const eggGroups = res.data["egg_groups"]
-        .map(group => {
+        .map((group) => {
           return group.name
             .toLowerCase()
             .split(" ")
-            .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(" ");
         })
         .join(", ");
@@ -160,7 +162,7 @@ export default class Pokemon extends Component {
         genderRatioMale,
         catchRate,
         eggGroups,
-        hatchSteps
+        hatchSteps,
       });
     });
 
@@ -175,13 +177,13 @@ export default class Pokemon extends Component {
         defense,
         speed,
         specialAttack,
-        specialDefense
+        specialDefense,
       },
       themeColor,
       height,
       weight,
       abilities,
-      evs
+      evs,
     });
   }
   render() {
@@ -191,23 +193,23 @@ export default class Pokemon extends Component {
           <div className="card-header">
             <div className="row">
               <div className="col-5">
-                <h5>{this.state.pokemonIndex}</h5>
+                <h5>{""}</h5>
               </div>
               <div className="col-7">
                 <div className="float-right">
-                  {this.state.types.map(type => (
+                  {this.state.types.map((type) => (
                     <span
                       key={type}
                       className="badge badge-pill mr-1"
                       style={{
                         backgroundColor: `#${TYPE_COLORS[type]}`,
-                        color: "white"
+                        color: "white",
                       }}
                     >
                       {type
                         .toLowerCase()
                         .split(" ")
-                        .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
                         .join(" ")}
                     </span>
                   ))}
@@ -229,7 +231,7 @@ export default class Pokemon extends Component {
                   {this.state.name
                     .toLowerCase()
                     .split(" ")
-                    .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+                    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
                     .join(" ")}
                 </h4>
                 <div className="row align-items-center">
@@ -243,7 +245,7 @@ export default class Pokemon extends Component {
                         role="progressbar"
                         style={{
                           width: `${this.state.stats.hp}%`,
-                          backgroundColor: `#${this.state.themeColor}`
+                          backgroundColor: `#${this.state.themeColor}`,
                         }}
                         aria-valuenow="25"
                         aria-valuemin="0"
@@ -265,7 +267,7 @@ export default class Pokemon extends Component {
                         role="progressbar"
                         style={{
                           width: `${this.state.stats.attack}%`,
-                          backgroundColor: `#${this.state.themeColor}`
+                          backgroundColor: `#${this.state.themeColor}`,
                         }}
                         aria-valuenow="25"
                         aria-valuemin="0"
@@ -287,7 +289,7 @@ export default class Pokemon extends Component {
                         role="progressbar"
                         style={{
                           width: `${this.state.stats.defense}%`,
-                          backgroundColor: `#${this.state.themeColor}`
+                          backgroundColor: `#${this.state.themeColor}`,
                         }}
                         aria-valuenow="25"
                         aria-valuemin="0"
@@ -309,7 +311,7 @@ export default class Pokemon extends Component {
                         role="progressbar"
                         style={{
                           width: `${this.state.stats.speed}%`,
-                          backgroundColor: `#${this.state.themeColor}`
+                          backgroundColor: `#${this.state.themeColor}`,
                         }}
                         aria-valuenow="25"
                         aria-valuemin="0"
@@ -331,7 +333,7 @@ export default class Pokemon extends Component {
                         role="progressbar"
                         style={{
                           width: `${this.state.stats.specialAttack}%`,
-                          backgroundColor: `#${this.state.themeColor}`
+                          backgroundColor: `#${this.state.themeColor}`,
                         }}
                         aria-valuenow={this.state.stats.specialAttack}
                         aria-valuemin="0"
@@ -353,7 +355,7 @@ export default class Pokemon extends Component {
                         role="progressbar"
                         style={{
                           width: `${this.state.stats.specialDefense}%`,
-                          backgroundColor: `#${this.state.themeColor}`
+                          backgroundColor: `#${this.state.themeColor}`,
                         }}
                         aria-valuenow={this.state.stats.specialDefense}
                         aria-valuemin="0"
@@ -374,7 +376,7 @@ export default class Pokemon extends Component {
           </div>
           <hr />
           <div className="card-body">
-            <h5 class="card-title text-center">Profile</h5>
+            <h5 className="card-title text-center">Profile</h5>
             <div className="row">
               <div className="col-md-6">
                 <div className="row">
@@ -400,13 +402,13 @@ export default class Pokemon extends Component {
                     <h6 className="float-right">Gender Ratio:</h6>
                   </div>
                   <div className="col-6">
-                    <div class="progress">
+                    <div className="progress">
                       <div
-                        class="progress-bar"
+                        className="progress-bar"
                         role="progressbar"
                         style={{
                           width: `${this.state.genderRatioFemale}%`,
-                          backgroundColor: "#c2185b"
+                          backgroundColor: "#c2185b",
                         }}
                         aria-valuenow="15"
                         aria-valuemin="0"
@@ -415,11 +417,11 @@ export default class Pokemon extends Component {
                         <small>{this.state.genderRatioFemale}</small>
                       </div>
                       <div
-                        class="progress-bar"
+                        className="progress-bar"
                         role="progressbar"
                         style={{
                           width: `${this.state.genderRatioMale}%`,
-                          backgroundColor: "#1976d2"
+                          backgroundColor: "#1976d2",
                         }}
                         aria-valuenow="30"
                         aria-valuemin="0"
@@ -461,7 +463,7 @@ export default class Pokemon extends Component {
               </div>
             </div>
           </div>
-          <div class="card-footer text-muted">
+          <div className="card-footer text-muted">
             Data From{" "}
             <a
               href="https://pokeapi.co/"
