@@ -8,7 +8,7 @@ export default class PokemonList extends Component {
   state = {
     pokemon: [],
     count: 0,
-    limit: 30
+    limit: 30,
   };
 
   componentDidMount() {
@@ -21,10 +21,10 @@ export default class PokemonList extends Component {
           "&limit=" +
           `${this.state.limit}`
       )
-      .then(res =>
+      .then((res) =>
         this.setState({
           pokemon: res.data["results"],
-          count: this.state.count + this.state.limit
+          count: this.state.count + this.state.limit,
         })
       );
   }
@@ -38,10 +38,10 @@ export default class PokemonList extends Component {
           "&limit=" +
           `${this.state.limit}`
       )
-      .then(res =>
+      .then((res) =>
         this.setState({
           pokemon: [...this.state.pokemon, ...res.data["results"]],
-          count: this.state.count + this.state.limit
+          count: this.state.count + this.state.limit,
         })
       );
   };
@@ -56,7 +56,7 @@ export default class PokemonList extends Component {
           loader={<h4>Loading...</h4>}
         >
           <div className="row">
-            {this.state.pokemon.map(pokemon => (
+            {this.state.pokemon.map((pokemon) => (
               <PokemonCard
                 key={pokemon.name}
                 name={pokemon.name}
@@ -64,7 +64,6 @@ export default class PokemonList extends Component {
               />
             ))}
           </div>
-          )}
         </InfiniteScroll>
       </div>
     );
