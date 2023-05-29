@@ -2,6 +2,13 @@
 
 One of my first projects to learn React.
 
+
+
+https://github.com/irafaelasilva/pokedex/assets/48286647/3a19e7e5-6729-4b51-9ebb-fc9b7a910dbb
+
+
+
+
 ### Available Scripts
 
 To run this project, you need:
